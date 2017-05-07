@@ -11,16 +11,8 @@ library(zoo)
 # keeping track of date, odometer reading, amount of gas, and cost of gas
 # Here I plan to look at the numbers!
 
-# 1. odometer reading over time. Basic.
-# 2. then mileage time series: need to create new variable.
-# 3. cost of gas over time
-# 4. number of fillups per month
-# 5. mileage per month (box plot/dots +/- std dev)
-# 6. cost of gas per month
-
 ## can overlay dates of oil changes and see if any of the above variables changes before and after
 ## same with date of new tires (7/19/2014)
-
 
 dat <- read.csv("mileage.csv")
 dat$Date <- mdy(dat$Date)
@@ -33,12 +25,6 @@ dat <- dat %>%
            Year = year(Date),
            Quarter = quarter(Date, with_year=TRUE),
            Halfyear = semester(Date, with_year=TRUE))
-# 
-# bymonth <- group_by(dat, Year, Month) %>%
-#     summarize(., avgmpg = mean(mileage, na.rm=TRUE), 
-#               avgprice = mean(gasprice, na.rm=TRUE),
-#               avgdays = mean(daysbetween, na.rm=TRUE),
-#               numfillups = count(Odometer))
 
 pdftitle <- paste0("fillup graphs_", Sys.Date(), ".pdf")
 pdf(pdftitle, height=8, width=10)
